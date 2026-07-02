@@ -9,3 +9,4 @@ prisma/dev.db-journal
 prisma/data-dump.json
 .DS_Store
 .vercel
+.env*
