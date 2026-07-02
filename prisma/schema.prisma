@@ -1,0 +1,62 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Work {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  description String?
+  imageUrl    String
+  width       Int      @default(1200)
+  height      Int      @default(1500)
+  featured    Boolean  @default(false)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Design {
+  id        String   @id @default(cuid())
+  title     String
+  imageUrl  String
+  width     Int      @default(1200)
+  height    Int      @default(1500)
+  status    String   @default("available") // "available" | "sold"
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DesignReservation {
+  id          String   @id @default(cuid())
+  designId    String
+  designTitle String
+  designOrder Int      @default(0)
+  name        String
+  email       String
+  phone       String
+  status      String   @default("new") // "new" | "contacted" | "confirmed" | "done" | "archived"
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Booking {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  city      String?
+  placement String?
+  idea      String
+  status    String   @default("new") // "new" | "contacted" | "scheduled" | "done" | "archived"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
