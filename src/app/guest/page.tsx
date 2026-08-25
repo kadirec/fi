@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronsDown, MapPin } from "lucide-react";
@@ -5,8 +6,24 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { OPEN_SPOTS, PAST_SPOTS } from "@/lib/guest";
 import { IMG } from "@/lib/images";
+import { PAGE_SEO, breadcrumbJsonLd, guestSpotsJsonLd, jsonLdScriptProps } from "@/lib/seo";
 
-export const metadata = { title: ".guest — fi.artistry" };
+export const metadata: Metadata = {
+  title: PAGE_SEO.guest.title,
+  description: PAGE_SEO.guest.description,
+  alternates: { canonical: PAGE_SEO.guest.path },
+  openGraph: {
+    title: PAGE_SEO.guest.title,
+    description: PAGE_SEO.guest.description,
+    url: PAGE_SEO.guest.path,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: PAGE_SEO.guest.title,
+    description: PAGE_SEO.guest.description,
+  },
+};
 
 export default function GuestPage() {
   // group past spots by year (using date if present, else "Archive")
@@ -24,6 +41,15 @@ export default function GuestPage() {
 
   return (
     <main className="relative">
+      <script
+        {...jsonLdScriptProps(
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Guest Spots", path: "/guest" },
+          ])
+        )}
+      />
+      <script {...jsonLdScriptProps(guestSpotsJsonLd())} />
       <Header />
 
       {/* Hero — same compact category pattern */}
@@ -39,7 +65,7 @@ export default function GuestPage() {
         <div className="absolute inset-0 bg-ink/60" />
         <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-transparent to-ink" />
 
-        <div className="relative z-10 text-center px-6">
+        <div className="relative z-10 text-center px-6 pt-12">
           <h1 className="font-display text-5xl sm:text-6xl md:text-[5rem] leading-none tracking-tight text-bone">
             .guest
           </h1>
@@ -79,7 +105,9 @@ export default function GuestPage() {
                     <h3 className="font-display text-5xl md:text-6xl tracking-tight">
                       {spot.city}
                     </h3>
-                    <p className="text-ink/60 text-sm mt-3">{spot.window}</p>
+                    {spot.window && (
+                      <p className="text-ink/60 text-sm mt-3">{spot.window}</p>
+                    )}
                   </div>
                   <div className="shrink-0">
                     <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-widest2 text-ink/80">

@@ -32,7 +32,9 @@ export function Guest() {
                   <h3 className="font-display text-5xl md:text-6xl tracking-tight">
                     {spot.city}
                   </h3>
-                  <p className="text-bone/60 text-sm mt-3">{spot.window}</p>
+                  {spot.window && (
+                    <p className="text-bone/60 text-sm mt-3">{spot.window}</p>
+                  )}
                 </div>
                 <div className="shrink-0">
                   <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-widest2 text-bone/80">

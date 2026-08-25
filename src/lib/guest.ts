@@ -11,10 +11,10 @@ export type GuestSpot = {
 // Sorted from newest to oldest within the past list.
 export const GUEST_SPOTS: GuestSpot[] = [
   // open / current
-  { city: "Hamburg", country: "Germany", window: "Sep 14 — Sep 21", status: "open", date: null },
-  { city: "Amsterdam", country: "Netherlands", window: "Oct 02 — Oct 09", status: "open", date: null },
+  { city: "Hamburg", country: "Germany", window: "", status: "open", date: null },
+  { city: "Amsterdam", country: "Netherlands", window: "", status: "open", date: null },
   { city: "İzmir", country: "Türkiye", window: "Year-round residency", status: "open", date: null },
-  { city: "Munich", country: "Germany", window: "Nov 18 — Nov 24", status: "open", date: null },
+  { city: "Munich", country: "Germany", window: "", status: "open", date: null },
 
   // past — 2024
   { city: "Stockholm", country: "Sweden", window: "20 – 25 May 2024", status: "past", date: "2024-05-20" },

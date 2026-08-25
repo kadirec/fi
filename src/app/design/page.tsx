@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronsDown, Settings } from "lucide-react";
@@ -5,12 +6,36 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { DesignLedger } from "@/components/design-ledger";
 import { IMG } from "@/lib/images";
+import { PAGE_SEO, breadcrumbJsonLd, jsonLdScriptProps } from "@/lib/seo";
 
-export const metadata = { title: ".design — fi.artistry" };
+export const metadata: Metadata = {
+  title: PAGE_SEO.design.title,
+  description: PAGE_SEO.design.description,
+  alternates: { canonical: PAGE_SEO.design.path },
+  openGraph: {
+    title: PAGE_SEO.design.title,
+    description: PAGE_SEO.design.description,
+    url: PAGE_SEO.design.path,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: PAGE_SEO.design.title,
+    description: PAGE_SEO.design.description,
+  },
+};
 
 export default function DesignPage() {
   return (
     <main className="relative">
+      <script
+        {...jsonLdScriptProps(
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Design", path: "/design" },
+          ])
+        )}
+      />
       <Header />
 
       {/* Hero: full-bleed bg with centered category title + chevron */}
@@ -26,7 +51,7 @@ export default function DesignPage() {
         <div className="absolute inset-0 bg-ink/55" />
         <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-transparent to-ink" />
 
-        <div className="relative z-10 text-center px-6">
+        <div className="relative z-10 text-center px-6 pt-12">
           <h1 className="font-display text-5xl sm:text-6xl md:text-[5rem] leading-none tracking-tight text-bone">
             .design
           </h1>

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { ChevronsDown } from "lucide-react";
 import { prisma } from "@/lib/prisma";
@@ -5,8 +6,24 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { WorksGallery } from "@/components/works-gallery";
 import { IMG } from "@/lib/images";
+import { PAGE_SEO, breadcrumbJsonLd, jsonLdScriptProps } from "@/lib/seo";
 
-export const metadata = { title: ".works — fi.artistry" };
+export const metadata: Metadata = {
+  title: PAGE_SEO.works.title,
+  description: PAGE_SEO.works.description,
+  alternates: { canonical: PAGE_SEO.works.path },
+  openGraph: {
+    title: PAGE_SEO.works.title,
+    description: PAGE_SEO.works.description,
+    url: PAGE_SEO.works.path,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: PAGE_SEO.works.title,
+    description: PAGE_SEO.works.description,
+  },
+};
 export const dynamic = "force-dynamic";
 
 export default async function WorksPage() {
@@ -23,6 +40,14 @@ export default async function WorksPage() {
 
   return (
     <main className="relative">
+      <script
+        {...jsonLdScriptProps(
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Works", path: "/works" },
+          ])
+        )}
+      />
       <Header />
 
       <section className="relative isolate h-[40svh] min-h-[300px] flex items-center justify-center overflow-hidden">
@@ -37,7 +62,7 @@ export default async function WorksPage() {
         <div className="absolute inset-0 bg-ink/55" />
         <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-transparent to-ink" />
 
-        <div className="relative z-10 text-center px-6">
+        <div className="relative z-10 text-center px-6 pt-12">
           <h1 className="font-display text-5xl sm:text-6xl md:text-[5rem] leading-none tracking-tight text-bone">
             .works
           </h1>
