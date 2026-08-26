@@ -63,7 +63,7 @@ export default function BookingPage() {
         </div>
       </section>
 
-      <section id="form" className="bg-bone text-ink py-20 md:py-28">
+      <section id="form" className="bg-ink text-bone py-20 md:py-28">
         <div className="mx-auto max-w-4xl px-6 md:px-10">
           <p className="text-center text-lg md:text-xl leading-relaxed">
             Hello, thank you for your interest in getting a tattoo with me. I kindly
